@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Dr. Mrunali Kasar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --sage:        #e6f5fb;
+      --sage-mid:    #b3e5fa;
+      --forest:      rgb(38, 176, 231);
+      --forest-dark: #0d4f6b;
+      --forest-btn:  #1c96c4;
+      --white:       #ffffff;
+      --text-dark:   #1a2024;
+      --text-mid:    #4a555e;
+      --text-light:  #7a8890;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--forest-dark); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: .9rem; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--forest); font-weight: 500;}
+    .nav-cta { background: var(--forest-btn); color: var(--white); border: none; border-radius: 50px; padding: 10px 24px; font-size: .85rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
+    .nav-cta:hover { background: var(--forest-dark); }
+
+    .page-header { background: var(--sage); padding: 80px 60px; text-align: center; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--forest-dark); margin-bottom: 16px; }
+    .page-header p { font-size: 1rem; color: var(--text-mid); max-width: 600px; margin: 0 auto; line-height: 1.6;}
+
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 80px 60px; }
+    
+    .contact-info { background: var(--forest-dark); color: var(--white); border-radius: 24px; padding: 50px; }
+    .contact-info h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px;}
+    .contact-info p { font-size: 1rem; color: var(--sage-mid); margin-bottom: 40px; line-height: 1.6;}
+    
+    .info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 30px;}
+    .info-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
+    .info-icon svg { width: 20px; height: 20px; color: var(--sage); }
+    .info-text h4 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--white);}
+    .info-text p { font-size: .95rem; color: var(--sage-mid); margin: 0; line-height: 1.5;}
+
+    .contact-form-container { padding: 20px 0;}
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: .9rem; font-weight: 600; color: var(--forest-dark); margin-bottom: 8px;}
+    .form-control { width: 100%; border: 1px solid rgba(13,79,107,0.15); border-radius: 8px; padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: .95rem; background: var(--white); transition: border-color .2s, box-shadow .2s;}
+    .form-control:focus { outline: none; border-color: var(--forest); box-shadow: 0 0 0 3px rgba(13,79,107,0.1);}
+    textarea.form-control { resize: vertical; min-height: 140px; }
+    
+    .btn-submit { background: var(--forest-btn); color: var(--white); border: none; border-radius: 50px; padding: 14px 32px; font-size: 1rem; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s, opacity .2s; width: 100%; margin-top: 10px;}
+    .btn-submit:hover { background: var(--forest-dark); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+    /* Toast / Snackbar */
+    .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--forest-dark); color: var(--white); padding: 16px 32px; border-radius: 12px; font-size: .95rem; box-shadow: 0 8px 30px rgba(0,0,0,.18); z-index: 999; opacity: 0; transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .4s; pointer-events: none; display: flex; align-items: center; gap: 10px; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    .toast.success { background: #0d7a3e; }
+    .toast.error { background: #c0392b; }
+    .toast-icon { font-size: 1.2rem; }
+
+    /* Thank-you overlay */
+    .thank-you-overlay { display: none; position: fixed; inset: 0; background: rgba(13,79,107,.85); z-index: 200; justify-content: center; align-items: center; }
+    .thank-you-overlay.active { display: flex; }
+    .thank-you-card { background: var(--white); border-radius: 24px; padding: 50px 40px; text-align: center; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,.25); animation: fadeUp .5s ease forwards; }
+    .thank-you-card h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--forest-dark); margin-bottom: 12px; }
+    .thank-you-card p { font-size: .95rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+    .thank-you-card .btn-whatsapp { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #fff; border: none; border-radius: 50px; padding: 12px 28px; font-size: .95rem; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .thank-you-card .btn-whatsapp:hover { background: #1ebe5c; }
+    .thank-you-card .btn-close-ty { background: none; border: 1px solid var(--sage-mid); border-radius: 50px; padding: 10px 24px; font-size: .85rem; cursor: pointer; color: var(--text-mid); font-family: 'DM Sans', sans-serif; margin-left: 10px; transition: background .2s; }
+    .thank-you-card .btn-close-ty:hover { background: var(--sage); }
+
+    footer { background: var(--forest-dark); color: rgba(255,255,255,.6); text-align: center; padding: 32px 60px; font-size: .82rem; }
+    footer span { color: rgba(255,255,255,.9); }
+
+    .fade-up { opacity: 0; transform: translateY(28px); animation: fadeUp 0.65s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dr. Mrunali Kasar</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Make Appointment</button>
+</nav>
+
+<section class="page-header fade-up">
+  <h1>Get in Touch</h1>
+  <p>Ready to start your health journey? Have a quick question? Feel free to reach out to my clinic directly.</p>
+</section>
+
+<section class="contact-wrapper fade-up" style="animation-delay: 0.1s">
+  
+  <div class="contact-info">
+    <h2>Contact Information</h2>
+    <p>Fill out the form or reach out via email or phone. I aim to respond to all inquiries within 24 hours.</p>
+    
+    <div class="info-item">
+      <div class="info-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+      </div>
+      <div class="info-text">
+        <h4>Phone</h4>
+        <p>+91 9082220218 </p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+      </div>
+      <div class="info-text">
+        <h4>Email</h4>
+        <p>kasarmrunali87@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="info-item">
+      <div class="info-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+      </div>
+      <div class="info-text">
+        <h4>Clinic Location</h4>
+        <p>Niramaya clinic, Kalyan East<br>Thane, 421306</p>
+        <a href="https://maps.app.goo.gl/SvXDQuSNBZXSHS7UA?g_st=aw" target="_blank" style="display: inline-block; margin-top: 8px; padding: 6px 12px; background: rgba(255,255,255,0.1); border-radius: 6px; color: var(--white); text-decoration: none; font-size: .85rem; transition: background .2s;">View on Map</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-container">
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    <form id="contactForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc6U3unN9T5U3dl7ZJ_lcxmo1jWMJGHlhKpZuqRrPn1bRJkVg/formResponse" method="POST" target="hidden_iframe">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="entry.792528226" class="form-control" placeholder="Jane Doe" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="entry.114635441" class="form-control" placeholder="jane@example.com" required>
+      </div>
+      <div class="form-group">
+        <label for="service">Interested Service</label>
+        <select id="service" name="entry.1171400178" class="form-control">
+          <option value="">Select a Service</option>
+          <option value="Weight Management">Weight Management</option>
+          <option value="Clinical Nutrition">Clinical Nutrition</option>
+          <option value="PCOS Weight Management & Care">PCOS Weight Management & Care</option>
+          <option value="Diabetes Care & Diet Planning">Diabetes Care & Diet Planning</option>
+          <option value="Immunity Boosting">Immunity Boosting</option>
+          <option value="Corporate Wellness">Corporate Wellness</option>
+          <option value="Other Inquiry">Other Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message / Health Goal</label>
+        <textarea id="message" name="entry.294131817" class="form-control" placeholder="Tell me a bit about what you are looking to achieve..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </div>
+
+</section>
+
+<footer>
+  &copy; 2026 <span>Dr. Mrunali Kasar</span>. All rights reserved.
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Thank-you Overlay -->
+<div class="thank-you-overlay" id="thankYouOverlay">
+  <div class="thank-you-card">
+    <div style="font-size: 3rem; margin-bottom: 16px;">&#10003;</div>
+    <h2>Thank You!</h2>
+    <p>Your message has been received successfully. Dr. Mrunali will get back to you within 24 hours.</p>
+    <div>
+      <a href="https://wa.me/919082220218?text=Hi%20Dr.%20Mrunali%2C%20I%20just%20submitted%20a%20query%20on%20your%20website." target="_blank" class="btn-whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.79 23.492l4.609-1.47A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.592-5.932-1.62l-.424-.253-2.735.872.86-2.665-.276-.44A9.795 9.795 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <button class="btn-close-ty" onclick="document.getElementById('thankYouOverlay').classList.remove('active')">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const form = document.getElementById('contactForm');
+  const submitBtn = form.querySelector('.btn-submit');
+  const toastEl = document.getElementById('toast');
+  const iframe = document.getElementById('hidden_iframe');
+  let toastTimer;
+  let formSubmitted = false;
+
+  // --- Toast helper ---
+  function showToast(message, type) {
+    clearTimeout(toastTimer);
+    toastEl.className = 'toast ' + type;
+    toastEl.innerHTML = '<span class="toast-icon">' + (type === 'success' ? '&#10003;' : '&#10007;') + '</span> ' + message;
+    void toastEl.offsetWidth;
+    toastEl.classList.add('show');
+    toastTimer = setTimeout(function() { toastEl.classList.remove('show'); }, 4000);
+  }
+
+  // --- Validation ---
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  // --- When iframe loads after form submit, it means success ---
+  iframe.addEventListener('load', function() {
+    if (!formSubmitted) return;
+    formSubmitted = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+    showToast('Form submitted successfully!', 'success');
+    form.reset();
+    setTimeout(function() {
+      document.getElementById('thankYouOverlay').classList.add('active');
+    }, 600);
+  });
+
+  // --- Validate before allowing native submit ---
+  form.addEventListener('submit', function(e) {
+    var name    = document.getElementById('name').value.trim();
+    var email   = document.getElementById('email').value.trim();
+    var service = document.getElementById('service').value;
+    var message = document.getElementById('message').value.trim();
+
+    if (!name) { e.preventDefault(); showToast('Please enter your full name.', 'error'); return; }
+    if (!validateEmail(email)) { e.preventDefault(); showToast('Please enter a valid email address.', 'error'); return; }
+    if (!service) { e.preventDefault(); showToast('Please select a service.', 'error'); return; }
+    if (!message) { e.preventDefault(); showToast('Please enter your message.', 'error'); return; }
+
+    // All valid — allow native submit to proceed
+    formSubmitted = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | Dr. Mrunali Kasar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --sage:        #e6f5fb;
+      --sage-mid:    #b3e5fa;
+      --forest:      rgb(38, 176, 231);
+      --forest-dark: #0d4f6b;
+      --forest-btn:  #1c96c4;
+      --white:       #ffffff;
+      --text-dark:   #1a2024;
+      --text-mid:    #4a555e;
+      --text-light:  #7a8890;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--forest-dark); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: .9rem; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--forest); font-weight: 500;}
+    .nav-cta { background: var(--forest-btn); color: var(--white); border: none; border-radius: 50px; padding: 10px 24px; font-size: .85rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
+    .nav-cta:hover { background: var(--forest-dark); }
+
+    .page-header { background: var(--sage); padding: 80px 60px; text-align: center; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--forest-dark); margin-bottom: 16px; }
+    .page-header p { font-size: 1rem; color: var(--text-mid); max-width: 600px; margin: 0 auto; line-height: 1.6;}
+
+    .content-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 80px 60px; align-items: center; }
+    .content-image { border-radius: 24px; overflow: hidden; height: auto; box-shadow: 0 10px 40px rgba(13,79,107,0.15); display: flex; align-items: center; justify-content: center;}
+    .content-text h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--forest-dark); margin-bottom: 24px; }
+    .content-text p { font-size: .95rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 20px; }
+    
+    .timeline { padding: 40px 60px 80px; }
+    .timeline-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--forest-dark); text-align: center; margin-bottom: 50px;}
+    .timeline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;}
+    .timeline-item { background: var(--white); border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,.04); border: 1px solid var(--sage);}
+    .timeline-year { font-size: 1.2rem; font-weight: 700; color: var(--forest); margin-bottom: 10px; font-family: 'Playfair Display', serif;}
+    .timeline-item h4 { font-size: 1.05rem; color: var(--text-dark); margin-bottom: 12px;}
+    .timeline-item p { font-size: .88rem; color: var(--text-mid); line-height: 1.6;}
+
+    footer { background: var(--forest-dark); color: rgba(255,255,255,.6); text-align: center; padding: 32px 60px; font-size: .82rem; }
+    footer span { color: rgba(255,255,255,.9); }
+
+    .fade-up { opacity: 0; transform: translateY(28px); animation: fadeUp 0.65s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dr. Mrunali Kasar</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Make Appointment</button>
+</nav>
+
+<section class="page-header fade-up">
+  <h1>About Dr. Mrunal</h1>
+  <p>Passionate about uncomplicating nutrition and helping individuals create a sustainable, disease-free, and energetic life.</p>
+</section>
+
+<section class="content-section fade-up" style="animation-delay: 0.1s">
+  <div class="content-image">
+    <img src="assets/images/mrunal-image.jpeg" alt="Dr. Mrunali Kasar" style="width: 100%; height: auto; object-fit: cover; display: block;">
+  </div>
+  <div class="content-text">
+    <h2>My Philosophy & Journey</h2>
+    <p>With over 6 years of clinical experience, I believe that achieving health is not about extreme diets or punishing routines. It's about finding consistency, understanding your body's unique requirements, and healing from within using food as the ultimate medicine.</p>
+    <p>My approach bridges the gap between traditional wisdom and modern nutritional science. I have successfully guided hundreds of clients through complex lifestyle disorders, gut issues, and metabolic syndrome conditions.</p>
+    <p>I focus on habit building and sustainable lifestyle modifications that stay with you long after the consultation period is over.</p>
+  </div>
+</section>
+
+<section class="timeline fade-up" style="animation-delay: 0.2s">
+  <h2 class="timeline-title">Education & Experience</h2>
+  <div class="timeline-grid">
+    <div class="timeline-item">
+      <div class="timeline-year">2018</div>
+      <h4>BSc. Clinical Nutrition</h4>
+      <p>Graduated with top honors, specializing in dietary management for clinical conditions and holistic wellness approaches.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2020</div>
+      <h4>Certified Diabetes Educator</h4>
+      <p>Gained specialized certification to assist patients in managing and reversing Type 2 Diabetes through targeted nutrition.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2021 - Present</div>
+      <h4>Founder, Fit with Mrunal</h4>
+      <p>Started private practice consulting clients globally, focusing on PCOD, thyroid, gut health, and sustainable fat loss.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 <span>Dr. Mrunali Kasar</span>. All rights reserved.
+</footer>
+
+</body>
+</html>

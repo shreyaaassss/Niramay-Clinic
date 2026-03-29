@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services | Dr. Mrunali Kasar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --sage:        #e6f5fb;
+      --sage-mid:    #b3e5fa;
+      --forest:      rgb(38, 176, 231);
+      --forest-dark: #0d4f6b;
+      --forest-btn:  #1c96c4;
+      --white:       #ffffff;
+      --text-dark:   #1a2024;
+      --text-mid:    #4a555e;
+      --text-light:  #7a8890;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: var(--white);
+      box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--forest-dark); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: .9rem; color: var(--text-mid); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--forest); font-weight: 500;}
+    .nav-cta { background: var(--forest-btn); color: var(--white); border: none; border-radius: 50px; padding: 10px 24px; font-size: .85rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
+    .nav-cta:hover { background: var(--forest-dark); }
+
+    .page-header { background: var(--sage); padding: 80px 60px; text-align: center; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--forest-dark); margin-bottom: 16px; }
+    .page-header p { font-size: 1rem; color: var(--text-mid); max-width: 600px; margin: 0 auto; line-height: 1.6;}
+
+    .services-wrapper {  padding: 80px 60px; background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    
+    .service-card { background: var(--sage); border-radius: 20px; padding: 40px 30px; text-align: center; transition: transform .3s, box-shadow .3s; border: 1px solid var(--sage-mid);}
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(13,79,107,.1); background: var(--white);}
+    .service-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;  box-shadow: 0 4px 10px rgba(0,0,0,.05);}
+    .service-card:hover .service-icon { background: var(--sage);}
+    .service-icon svg { width: 30px; height: 30px; color: var(--forest); }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--forest-dark); margin-bottom: 15px; }
+    .service-card p { font-size: .9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 25px; }
+    .btn-outline { display: inline-block; border: 1.5px solid var(--forest-btn); color: var(--forest-btn); border-radius: 50px; padding: 10px 24px; font-size: .85rem; text-decoration: none; transition: all .2s; font-weight: 500;}
+    .btn-outline:hover { background: var(--forest-btn); color: var(--white); }
+
+    .cta-banner { background: var(--forest-dark); padding: 60px; text-align: center; color: var(--white); border-radius: 24px; margin: 0 60px 80px; }
+    .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px;}
+    .cta-banner p { font-size: 1rem; color: var(--sage-mid); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;}
+    .cta-banner .btn-primary { display: inline-flex; background: var(--sage); color: var(--forest-dark); border-radius: 50px; padding: 14px 30px; font-size: .95rem; font-weight: 600; text-decoration: none; transition: background .2s; }
+    .cta-banner .btn-primary:hover { background: var(--white); }
+
+    footer { background: var(--forest-dark); color: rgba(255,255,255,.6); text-align: center; padding: 32px 60px; font-size: .82rem; }
+    footer span { color: rgba(255,255,255,.9); }
+
+    .fade-up { opacity: 0; transform: translateY(28px); animation: fadeUp 0.65s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dr. Mrunali Kasar</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Make Appointment</button>
+</nav>
+
+<section class="page-header fade-up">
+  <h1>My Services & Programs</h1>
+  <p>Comprehensive nutrition plans tailored to your specific health goals, lifestyle, and medical history.</p>
+</section>
+
+<section class="services-wrapper">
+  <div class="services-grid fade-up" style="animation-delay: 0.1s">
+    
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+      </div>
+      <h3>Weight Management</h3>
+      <p>Sustainable fat loss and muscle gain programs without deprivation. Focus on metabolic health and long-term maintenance.</p>
+      <a href="contact.html" class="btn-outline">Learn More</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+      </div>
+      <h3>Clinical Nutrition</h3>
+      <p>Therapeutic diets for managing conditions like PCOS, Thyroid disorders, Diabetes, Hypertension, and Gut Health issues.</p>
+      <a href="contact.html" class="btn-outline">Learn More</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"></path></svg>
+      </div>
+      <h3>PCOS Weight Management & Care</h3>
+      <p>Providing specialized nutritional guidance for women with PCOS to support hormonal balance, healthy weight management, and symptom control. Focused on sustainable diet plans that improve metabolism, regulate cycles, and enhance overall well-being.</p>
+      <a href="contact.html" class="btn-outline">Learn More</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </div>
+      <h3>Diabetes Care & Diet Planning</h3>
+      <p>Skilled in managing Type 2 Diabetes through personalized diet plans and lifestyle interventions to improve glycemic control, enhance insulin sensitivity, and prevent complications.</p>
+      <a href="contact.html" class="btn-outline">Learn More</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+      </div>
+      <h3>Immunity Boosting</h3>
+      <p>Specialized dietary protocols aimed at strengthening the immune system and fighting persistent infections or lethargy.</p>
+      <a href="contact.html" class="btn-outline">Learn More</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+      </div>
+      <h3>Corporate Wellness</h3>
+      <p>Workshops, seminars, and group consulting meant to improve employee health, productivity, and reduce sick days.</p>
+      <a href="contact.html" class="btn-outline">Learn More</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-banner fade-up" style="animation-delay: 0.2s">
+  <h2>Ready to transform your lifestyle?</h2>
+  <p>Book a consultation today and take the first step towards a healthier, happier you.</p>
+  <a href="contact.html" class="btn-primary">Book an Appointment</a>
+</section>
+
+<footer>
+  &copy; 2026 <span>Dr. Mrunali Kasar</span>. All rights reserved.
+</footer>
+
+</body>
+</html>
